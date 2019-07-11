@@ -6,4 +6,9 @@
 
 <ion-content>
 
+<ion-searchbar [(ngModel)]="originString" ></ion-searchbar>
+<ion-searchbar [(ngModel)]="destinationString" ></ion-searchbar>
+
+<ion-button (click)="runSearch()">Cerca</ion-button>
+
 </ion-content>
