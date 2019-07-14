@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DirectionsPage } from './directions.page';
+//import { SimpleFunctionModule } from 'src/app/components/simple-function/simple-function.module';
+import {AutoCompleteModule} from 'ionic4-auto-complete';
 
 const routes: Routes = [
   {
@@ -19,6 +21,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    //SimpleFunctionModule,
+    AutoCompleteModule,
     RouterModule.forChild(routes)
   ],
   declarations: [DirectionsPage]

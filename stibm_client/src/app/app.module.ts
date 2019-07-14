@@ -16,7 +16,13 @@ import { AutoCompleteModule } from 'ionic4-auto-complete';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, AutoCompleteModule],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    HttpClientModule, 
+    AutoCompleteModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

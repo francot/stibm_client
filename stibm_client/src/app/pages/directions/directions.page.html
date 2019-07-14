@@ -1,14 +1,125 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>directions</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-toolbar>
+      <ion-title>Calcola la tariffa del tuo viaggio!</ion-title>
 
-<ion-searchbar [(ngModel)]="originString" ></ion-searchbar>
-<ion-searchbar [(ngModel)]="destinationString" ></ion-searchbar>
+  </ion-toolbar>
+    
+  <ion-toolbar>
+      <ion-title>Cerca il costo di un viaggio tra due Comuni</ion-title>
+  </ion-toolbar>
 
-<ion-button (click)="runSearch()">Cerca</ion-button>
+
+  <ion-grid> 
+      <ion-row>
+          <ion-col size="12">
+            <ion-auto-complete 
+            [multi]="false"
+            [dataProvider]="suggestService"
+            [disabled]="false"
+            [options]="originOptions"
+            (itemSelected)="originSelected($event)"></ion-auto-complete>
+          </ion-col>
+          
+      </ion-row>
+      <ion-row>
+          
+          <ion-col size="12">
+            <ion-auto-complete 
+            [multi]="false"
+            [dataProvider]="suggestService"
+            [disabled]="false"
+            [options]="destinationOptions"
+            (itemSelected)="destinationSelected($event)"></ion-auto-complete>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+            <ion-item>
+                <ion-label style= "color: darkgray">Data Inizio Viaggio</ion-label>
+                <ion-datetime (ionChange)="dataChanged()" display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY" [(ngModel)]="dataString"  [min]="this.getCurrDate()" placeholder="Seleziona una data"></ion-datetime>
+              </ion-item>
+              
+        </ion-col>
+        <ion-col size="6">
+            <ion-item>
+                <ion-label style= "color: darkgray">Ora Inizio Viaggio</ion-label>
+                <ion-datetime [(ngModel)]="oraString"  display-format="HH:mm" picker-format="HH:mm" [min]="this.getCurrDate()"></ion-datetime>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size="2">
+              <ion-button [disabled]='this.originString == null || this.destinationString == null' (click)="runSearch()">Calcola la Tariffa</ion-button>
+          </ion-col>
+      </ion-row>
+  </ion-grid> 
+
+<!--  
+   <ion-button  [routerLink]="['/directions/2']">test</ion-button> 
+   -->
+<ion-list *ngIf="results != null">
+
+  <ion-item *ngFor="let result of results" [routerLink]="['/','directions', result.fare.id]">
+    
+    <ion-grid>
+  
+      <ion-row >
+      <ion-col size="3" align-self-center>
+        <ion-row >
+          <ion-button  expand="full">  Tariffa {{result.fare.id}}  </ion-button>
+        <!--<ion-label color = "primary" style="font-size: 14pt"> Tariffa {{result.fare.id}}  </ion-label> -->
+      </ion-row>
+      <ion-row>
+          <ion-button  expand="full"> {{result.fare.price}} &euro;   </ion-button>
+
+        <!--<ion-label color = "primary" style="font-size: 14pt;">{{result.fare.price}} &euro;  </ion-label> -->
+      </ion-row>
+      </ion-col>
+        <ion-col size="6" >
+          <ion-grid>
+               <ion-row *ngFor="let step of result.steps; let i = index" > 
+           <!--  
+
+              <ion-col size="12" [ngStyle]="getStyleRow(i)">
+                   -->
+              <ion-col size="12"  >
+                  <div class="stepList">
+                  <ion-button size="small" color="secondary">
+                  <img *ngIf="step.line.vehicle.local_icon != null" src="{{step.line.vehicle.local_icon}}">
+                  <img *ngIf="step.line.vehicle.local_icon == null && step.line.vehicle.icon != null" src="{{step.line.vehicle.icon}}">
+                {{step.line.short_name}}
+              </ion-button>
+                {{step.line.name}}
+                <ion-icon name="code"></ion-icon>
+                {{step.line.agencies[0].name}}
+              </div> 
+    
+              </ion-col>
+            </ion-row>
+            
+          </ion-grid>  
+        </ion-col>
+        <ion-col size="3">
+            <ion-row>
+              <ion-button>
+                Durata Viaggio: {{result.duration.text}}  </ion-button>
+                </ion-row>
+
+            <ion-row>
+                <ion-button>
+                    Partenza: {{result.departure_time.text}}  </ion-button>
+          </ion-row>
+          <ion-row>
+              <ion-button>
+                  Arrivo: {{result.arrival_time.text}}   </ion-button>
+              </ion-row>
+
+        </ion-col>
+      </ion-row>
+    
+      </ion-grid> 
+  </ion-item>
+</ion-list>
+
 
 </ion-content>
