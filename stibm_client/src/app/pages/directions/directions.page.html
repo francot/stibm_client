@@ -64,34 +64,27 @@
     <ion-grid>
   
       <ion-row >
-      <ion-col size="3" align-self-center>
-        <ion-row >
-          <ion-button  expand="full">  Tariffa {{result.fare.id}}  </ion-button>
-        <!--<ion-label color = "primary" style="font-size: 14pt"> Tariffa {{result.fare.id}}  </ion-label> -->
-      </ion-row>
-      <ion-row>
-          <ion-button  expand="full"> {{result.fare.price}} &euro;   </ion-button>
+  
+        
 
-        <!--<ion-label color = "primary" style="font-size: 14pt;">{{result.fare.price}} &euro;  </ion-label> -->
-      </ion-row>
-      </ion-col>
-        <ion-col size="6" >
+        <ion-col size="9" >
           <ion-grid>
                <ion-row *ngFor="let step of result.steps; let i = index" > 
            <!--  
 
               <ion-col size="12" [ngStyle]="getStyleRow(i)">
                    -->
-              <ion-col size="12"  >
+              <ion-col size="12" [ngStyle]="getStyleRow(step)">
                   <div class="stepList">
-                  <ion-button size="small" color="secondary">
-                  <img *ngIf="step.line.vehicle.local_icon != null" src="{{step.line.vehicle.local_icon}}">
+                      <img *ngIf="step.line.vehicle.local_icon != null" src="{{step.line.vehicle.local_icon}}">
                   <img *ngIf="step.line.vehicle.local_icon == null && step.line.vehicle.icon != null" src="{{step.line.vehicle.icon}}">
+              <ion-button size="small" color="secondary"> <!-- mettere colore color = {{step.line.color}}  -->
                 {{step.line.short_name}}
               </ion-button>
-                {{step.line.name}}
-                <ion-icon name="code"></ion-icon>
-                {{step.line.agencies[0].name}}
+              {{step.departure_stop.name}}<ion-icon name="ios-arrow-forward"></ion-icon> {{step.arrival_stop.name}}
+               >>> ( {{step.num_stops}} fermate )
+               >>> 
+               <ion-button href={{step.line.agencies[0].url}}>{{step.line.agencies[0].name}}</ion-button>
               </div> 
     
               </ion-col>
@@ -101,22 +94,33 @@
         </ion-col>
         <ion-col size="3">
             <ion-row>
-              <ion-button>
-                Durata Viaggio: {{result.duration.text}}  </ion-button>
+                  <ion-button> {{result.departure_time.text}}   <ion-icon name="ios-arrow-forward">  </ion-icon> {{result.arrival_time.text}}   </ion-button>
                 </ion-row>
 
             <ion-row>
-                <ion-button>
-                    Partenza: {{result.departure_time.text}}  </ion-button>
+                <ion-button> Durata: {{result.duration.text}}  </ion-button>
+
           </ion-row>
-          <ion-row>
-              <ion-button>
-                  Arrivo: {{result.arrival_time.text}}   </ion-button>
-              </ion-row>
+
 
         </ion-col>
       </ion-row>
     
+
+      <ion-row>
+
+          <ion-col size="12" align-self-center>
+              <ion-row >
+                  <ion-toolbar> <ion-title>Tariffa {{result.fare.id}}  >>>>>> {{result.fare.price}}&euro; >>>durata: 90' >>> valida da m1 a m13 </ion-title></ion-toolbar>
+            </ion-row>
+            </ion-col>              
+
+
+
+
+        </ion-row>
+
+      
       </ion-grid> 
   </ion-item>
 </ion-list>

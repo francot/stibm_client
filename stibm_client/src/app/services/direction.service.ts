@@ -29,8 +29,9 @@ export class DirectionService {
   * @returns Observable with the search results
   */
   searchData(origin: string, destination: string, dateTime: string = "now"): Observable<any> {
+    let urlRequest = `${this.url}get_directions_data?origin=${encodeURI(origin)}&destination=${encodeURI(destination)}&datetime=${encodeURI(dateTime)}}`;
 
-    let urlRequest = `${this.url}get_directions_data?origin=${encodeURI(origin)}&destination=${encodeURI(destination)}&datetime=${encodeURI(dateTime)}`;
+ //   let urlRequest = `${this.url}get_directions_data?origin=${encodeURI(origin)}&destination=${encodeURI(destination)}&datetime=${encodeURI(dateTime)}`;
     console.log("RUN REQUEST: " + urlRequest);
     return this.http.get(urlRequest);
 

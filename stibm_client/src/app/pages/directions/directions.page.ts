@@ -75,7 +75,7 @@ export class DirectionsPage implements OnInit {
         let datetime = this.dataString+"|"+this.oraString;
         
         this.presentLoading();
-        this.directionService.searchData(this.originString, this.destinationString, datetime).subscribe(result => {
+        this.directionService.searchData(this.originString, this.destinationString).subscribe(result => {
           this.results = result;
           //console.log(this.results);
           this.dismissLoading();
@@ -89,13 +89,16 @@ export class DirectionsPage implements OnInit {
   
  
 
-  getStyleRow(i) {
+  getStyleRow(step) {
 
+    /*
     if (i % 2 == 0) {
       return {'background-color':'red', 'color':'yellow'};
     } else {
       return {'background-color':'yellow', 'color':'red'};
-    }
+    }*/
+
+    return {};
 
     
   }
