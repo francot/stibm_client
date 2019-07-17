@@ -1,12 +1,16 @@
 <ion-content>
-  <ion-toolbar>
+  <!-- <ion-toolbar>
       <ion-title>Calcola la tariffa del tuo viaggio!</ion-title>
 
-  </ion-toolbar>
-    
-  <ion-toolbar>
+  </ion-toolbar> -->
+
+  <!-- <ion-toolbar>
       <ion-title>Cerca il costo di un viaggio tra due Comuni</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
+  <div padding text-center>
+    <h2>Calcola la tariffa del tuo viaggio!</h2>
+    <h4 style="font-size:11pt">Cerca il costo di un viaggio tra due Comuni</h4>
+  </div>
 
 
   <ion-grid> 
@@ -33,14 +37,14 @@
           </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="6">
+        <ion-col  col-sm-12 col-xl-12 col-md-6 col-lg-6>
             <ion-item>
                 <ion-label style= "color: darkgray">Data Inizio Viaggio</ion-label>
                 <ion-datetime (ionChange)="dataChanged()" display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY" [(ngModel)]="dataString"  [min]="this.getCurrDate()" placeholder="Seleziona una data"></ion-datetime>
               </ion-item>
               
         </ion-col>
-        <ion-col size="6">
+        <ion-col  col-sm-12 col-xl-12 col-md-6 col-lg-6>
             <ion-item>
                 <ion-label style= "color: darkgray">Ora Inizio Viaggio</ion-label>
                 <ion-datetime [(ngModel)]="oraString"  display-format="HH:mm" picker-format="HH:mm" [min]="this.getCurrDate()"></ion-datetime>
@@ -48,8 +52,8 @@
         </ion-col>
       </ion-row>
       <ion-row>
-          <ion-col size="2">
-              <ion-button [disabled]='this.originString == null || this.destinationString == null' (click)="runSearch()">Calcola la Tariffa</ion-button>
+          <ion-col  size="12">
+              <ion-button expand="block" [disabled]='this.originString == null || this.destinationString == null' (click)="runSearch()">Calcola la Tariffa</ion-button>
           </ion-col>
       </ion-row>
   </ion-grid> 

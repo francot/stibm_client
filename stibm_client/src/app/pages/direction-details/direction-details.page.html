@@ -1,130 +1,130 @@
 <style>
   
-    ion-col > div {
-      background-color: #f7f7f7;
-      border: solid 1px #ddd;
-      padding: 10px;
-      border-radius: 5px;
-      margin-left: 5px;
-      margin-right: 5px;
-      text-align: center;
-      h4 {
-      font-weight: bold;
+  ion-col > div {
+    /* background-color: #f7f7f7; */
+    /*border: solid 1px #ddd;*/
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    h4 {
+    font-weight: bold;
+}
   }
-    }
-  </style>
+</style>
 
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/"></ion-back-button>
-      </ion-buttons>
-      <ion-title> Dettaglio Tariffa </ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title> Dettaglio Tariffa </ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-    <ion-grid>
-        <div  style="border: solid 1px #ddd" >
-        <ion-row >
-          <ion-col size= "12" >
-            <div class="ion-text-center ion-text-uppercase"><h4>Titoli di viaggio occasionali</h4></div>
+  <ion-grid>
+      <div  >
+      <ion-row >
+        <ion-col size= "12">
+          <div class="ion-text-center ion-text-uppercase bg_blu"><h4>Titoli di viaggio occasionali</h4></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col size= "4">
+            <div class="ion-text-center ion-text-capitalize" >Ordinario</div>
+          </ion-col>
+          <ion-col size= "4">
+              <div class="ion-text-center ion-text-capitalize" >Giornaliero</div>
+          </ion-col>
+          <ion-col size= "4">
+              <div class="ion-text-center ion-text-capitalize" >3 giorni</div>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size= "4" > 
+           <div class="ion-text-center"><strong>{{information.ordinario.ord}} &euro;</strong> </div> 
+          </ion-col>
+          <ion-col size= "4" >
+              <div class="ion-text-center"> <strong> {{information.ordinario.giorn}} &euro;</strong> </div> 
+          </ion-col>
+          <ion-col size= "4" >
+              <div class="ion-text-center"> <strong>{{information.ordinario.tregiorn}} &euro; </strong></div> 
+          </ion-col>
+      </ion-row>
+  </div>
+
+
+
+  <div  >
+
+      <ion-row>
+        <ion-col size="12">
+            <div  class="ion-text-center ion-text-uppercase bg_blu"><h4>Abbonamenti ordinari</h4> </div>
           </ion-col>
         </ion-row>
 
         <ion-row>
-            <ion-col size= "4">
-              <div class="ion-text-center ion-text-capitalize" >Ordinario</div>
+            <ion-col size="4">
+              <div class="ion-text-capitalize">Settimanale</div>
+            </ion-col >
+            <ion-col size="4">
+                <div class= "ion-text-capitalize">Mensile</div>
             </ion-col>
-            <ion-col size= "4">
-                <div class="ion-text-center ion-text-capitalize" >Giornaliero</div>
-            </ion-col>
-            <ion-col size= "4">
-                <div class="ion-text-center ion-text-capitalize" >3 giorni</div>
+            <ion-col size="4">
+                <div class= "ion-text-capitalize">Annuale</div>
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col size= "4" > 
-             <div class="ion-text-center">{{information.ordinario.ord}} &euro; </div> 
+            <ion-col>
+               <div><strong> {{information.abbordinario.sett}} &euro; </strong> </div>
             </ion-col>
-            <ion-col size= "4" >
-                <div class="ion-text-center">  {{information.ordinario.giorn}} &euro; </div> 
+            <ion-col>
+                  <div><strong> {{information.abbordinario.mensile}} &euro;  </strong> </div>
             </ion-col>
-            <ion-col size= "4" >
-                <div class="ion-text-center"> {{information.ordinario.tregiorn}} &euro; </div> 
+            <ion-col>
+                  <div> <strong>{{information.abbordinario.annuale}} &euro;  </strong> </div>
             </ion-col>
         </ion-row>
-    </div>
+ 
+      </div>
 
-
-
-    <div  style="border: solid 1px #ddd" >
+      <div   >
 
         <ion-row>
           <ion-col size="12">
-              <div  class="ion-text-center ion-text-uppercase"><h4>Abbonamenti ordinari</h4> </div>
+              <div class="ion-text-center ion-text-uppercase bg_blu"><h4> Abbonamenti agevolati</h4> </div>
             </ion-col>
           </ion-row>
 
           <ion-row>
-              <ion-col size="4">
-                <div class="ion-text-capitalize">Settimanale</div>
-              </ion-col >
-              <ion-col size="4">
-                  <div class= "ion-text-capitalize">Mensile</div>
-              </ion-col>
-              <ion-col size="4">
-                  <div class= "ion-text-capitalize">Annuale</div>
-              </ion-col>
-          </ion-row>
-          <ion-row>
               <ion-col>
-                 <div> {{information.abbordinario.sett}} &euro;  </div>
+                <div class= "ion-text-capitalize">Mensile under26 / over65</div>
               </ion-col>
               <ion-col>
-                    <div> {{information.abbordinario.mensile}} &euro;   </div>
-              </ion-col>
-              <ion-col>
-                    <div> {{information.abbordinario.annuale}} &euro;   </div>
-              </ion-col>
-          </ion-row>
-   
-        </div>
-
-        <div  style="border: solid 1px #ddd" >
-
-          <ion-row>
-            <ion-col size="12">
-                <div class="ion-text-center ion-text-uppercase"><h4> Abbonamenti agevolati</h4> </div>
-              </ion-col>
-            </ion-row>
-
-            <ion-row>
-                <ion-col>
                   <div class= "ion-text-capitalize">Mensile under26 / over65</div>
-                </ion-col>
-                <ion-col>
-                    <div class= "ion-text-capitalize">Mensile under26 / over65</div>
-                </ion-col>
-                <ion-col>
-                    <div class= "ion-text-capitalize">Annuale ISEE < 6.000 &euro; </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                   <div> {{information.abbagevolato.mensile}} &euro; </div>
-                </ion-col>
-                <ion-col>
-                    <div> {{information.abbagevolato.annuale}} &euro; </div>
-                </ion-col>
-                <ion-col>
-                    <div>{{information.abbagevolato.annualeisee}} &euro; </div>
-                </ion-col>
-            </ion-row>
+              </ion-col>
+              <ion-col>
+                  <div class= "ion-text-capitalize">Annuale ISEE < 6.000 &euro; </div>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                 <div> <strong>{{information.abbagevolato.mensile}} &euro; </strong></div>
+              </ion-col>
+              <ion-col>
+                  <div><strong> {{information.abbagevolato.annuale}} &euro; </strong></div>
+              </ion-col>
+              <ion-col>
+                  <div><strong>{{information.abbagevolato.annualeisee}} &euro; </strong></div>
+              </ion-col>
+          </ion-row>
 
-        </div>
+      </div>
 
-    </ion-grid>
+  </ion-grid>
 
 
 </ion-content>
