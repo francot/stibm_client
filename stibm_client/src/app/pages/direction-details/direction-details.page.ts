@@ -1,4 +1,4 @@
-import { DirectionService } from './../../services/direction.service';
+//import { DirectionService } from './../../services/direction.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,7 +12,19 @@ import { ActivatedRoute } from '@angular/router';
 export class DirectionDetailsPage implements OnInit {  
   
   information = null;
+  idSelected : any = null;
+
+
+  
+
   private ticketInfo = {
+    "1 (Urbano Milano)" : { 
+      "ordinario" : { "ord" : "2,00" , "giorn" : "7,00" , "tregiorn" : "12,00" } , 
+      "abbordinario" : { "sett" : "-" , "mensile" : "50,00" , "annuale" : "460,00" }, 
+      "abbagevolato" : { "mensile" : "37,50" , "annuale" : "345,00" , "annualeisee" : "69,00" } 
+
+    },
+
     "1" : { 
       "ordinario" : { "ord" : "2,00" , "giorn" : "7,00" , "tregiorn" : "12,00" } , 
       "abbordinario" : { "sett" : "17,00" , "mensile" : "50,00" , "annuale" : "460,00" }, 
@@ -50,19 +62,18 @@ export class DirectionDetailsPage implements OnInit {
    /**
    * Constructor of our details page
    * @param activatedRoute Information about the route we are on
-   * @param directionService The direction Service to get data
    */
-  constructor (private activatedRoute: ActivatedRoute, private directionService: DirectionService) { }
+  constructor (private activatedRoute: ActivatedRoute) { }
 
 
   ngOnInit() {
     // Get the ID that was passed with the URL
     let id = this.activatedRoute.snapshot.paramMap.get('id');
- 
+    this.idSelected = id;
     //alert("id: "+id);
     this.information = this.ticketInfo[id];
 
-
+    
     /*
     // Get the information from the API
     this.movieService.getDetails(id).subscribe(result => {

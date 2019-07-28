@@ -19,110 +19,204 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title> Dettaglio Tariffa </ion-title>
+    <ion-title> Dettaglio Tariffa {{idSelected}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-      <div  >
-      <ion-row >
-        <ion-col size= "12">
-          <div class="ion-text-center ion-text-uppercase bg_blu"><h4>Titoli di viaggio occasionali</h4></div>
-        </ion-col>
+    <ion-row >
+      <ion-col size= "12">
+        <div class="ion-text-center ion-text-uppercase bg_blu"><h4>Titoli di viaggio occasionali</h4></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-sm>
+        <ion-card >
+          <ion-card-header>
+            <ion-card-title>
+              <div class="ion-text-center ion-text-capitalize">
+                {{information.ordinario.ord}} &euro;
+              </div>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+              <div class="ion-text-center ion-text-capitalize">
+                Ordinario
+              </div>
+          </ion-card-content>
+          </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-sm>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title> 
+              <div class="ion-text-center ion-text-capitalize">
+                {{information.ordinario.giorn}} &euro;
+              </div>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="ion-text-center ion-text-capitalize">
+              Giornaliero
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col >
+
+      <ion-col size="12" size-sm>
+        <ion-card>
+          <ion-card-header>
+            <div class="ion-text-center ion-text-capitalize">           
+              <ion-card-title> {{information.ordinario.tregiorn}} &euro;</ion-card-title>
+            </div>
+          </ion-card-header>
+        <ion-card-content>
+          <div class="ion-text-center ion-text-capitalize">   
+            3 giorni
+          </div>  
+        </ion-card-content>
+        </ion-card>
+      </ion-col>
       </ion-row>
 
-      <ion-row>
-          <ion-col size= "4">
-            <div class="ion-text-center ion-text-capitalize" >Ordinario</div>
-          </ion-col>
-          <ion-col size= "4">
-              <div class="ion-text-center ion-text-capitalize" >Giornaliero</div>
-          </ion-col>
-          <ion-col size= "4">
-              <div class="ion-text-center ion-text-capitalize" >3 giorni</div>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col size= "4" > 
-           <div class="ion-text-center"><strong>{{information.ordinario.ord}} &euro;</strong> </div> 
-          </ion-col>
-          <ion-col size= "4" >
-              <div class="ion-text-center"> <strong> {{information.ordinario.giorn}} &euro;</strong> </div> 
-          </ion-col>
-          <ion-col size= "4" >
-              <div class="ion-text-center"> <strong>{{information.ordinario.tregiorn}} &euro; </strong></div> 
-          </ion-col>
-      </ion-row>
-  </div>
 
-
-
-  <div  >
-
-      <ion-row>
-        <ion-col size="12">
-            <div  class="ion-text-center ion-text-uppercase bg_blu"><h4>Abbonamenti ordinari</h4> </div>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-            <ion-col size="4">
-              <div class="ion-text-capitalize">Settimanale</div>
-            </ion-col >
-            <ion-col size="4">
-                <div class= "ion-text-capitalize">Mensile</div>
-            </ion-col>
-            <ion-col size="4">
-                <div class= "ion-text-capitalize">Annuale</div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-               <div><strong> {{information.abbordinario.sett}} &euro; </strong> </div>
-            </ion-col>
-            <ion-col>
-                  <div><strong> {{information.abbordinario.mensile}} &euro;  </strong> </div>
-            </ion-col>
-            <ion-col>
-                  <div> <strong>{{information.abbordinario.annuale}} &euro;  </strong> </div>
-            </ion-col>
-        </ion-row>
- 
-      </div>
-
-      <div   >
-
-        <ion-row>
-          <ion-col size="12">
-              <div class="ion-text-center ion-text-uppercase bg_blu"><h4> Abbonamenti agevolati</h4> </div>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-              <ion-col>
-                <div class= "ion-text-capitalize">Mensile under26 / over65</div>
+      
+          
+          <ion-row >
+              <ion-col size= "12">
+                <div class="ion-text-center ion-text-uppercase bg_blu"><h4>Abbonamenti ordinari</h4></div>
               </ion-col>
-              <ion-col>
-                  <div class= "ion-text-capitalize">Mensile under26 / over65</div>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12" size-sm>
+                <ion-card >
+                  <ion-card-header>
+                    <ion-card-title>
+                      <div class="ion-text-center ion-text-capitalize">
+                        {{information.abbordinario.sett}} &euro;
+                      </div>
+                    </ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                      <div class="ion-text-center ion-text-capitalize">
+                        Settimanale
+                      </div>
+                  </ion-card-content>
+                  </ion-card>
               </ion-col>
-              <ion-col>
-                  <div class= "ion-text-capitalize">Annuale ISEE < 6.000 &euro; </div>
+        
+              <ion-col size="12" size-sm>
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title> 
+                      <div class="ion-text-center ion-text-capitalize">
+                        {{information.abbordinario.mensile}} &euro;
+                      </div>
+                    </ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div class="ion-text-center ion-text-capitalize">
+                      Mensile
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col >
+        
+              <ion-col size="12" size-sm>
+                <ion-card>
+                  <ion-card-header>
+                    <div class="ion-text-center ion-text-capitalize">           
+                      <ion-card-title> {{information.abbordinario.annuale}} &euro;</ion-card-title>
+                    </div>
+                  </ion-card-header>
+                <ion-card-content>
+                  <div class="ion-text-center ion-text-capitalize">   
+                    Annuale
+                  </div>  
+                </ion-card-content>
+                </ion-card>
               </ion-col>
-          </ion-row>
-          <ion-row>
-              <ion-col>
-                 <div> <strong>{{information.abbagevolato.mensile}} &euro; </strong></div>
-              </ion-col>
-              <ion-col>
-                  <div><strong> {{information.abbagevolato.annuale}} &euro; </strong></div>
-              </ion-col>
-              <ion-col>
-                  <div><strong>{{information.abbagevolato.annualeisee}} &euro; </strong></div>
-              </ion-col>
-          </ion-row>
+              </ion-row>
+               
+              <ion-row>
+                  <ion-col size= "12">
+                    <div class="ion-text-center ion-text-uppercase bg_blu"><h4>Abbonamenti agevolati</h4></div>
+                  </ion-col>
+                </ion-row>
 
-      </div>
+              <ion-row *ngIf="idSelected=='1 (Urbano Milano)'">
+                  <ion-col size= "12" size-sm>
+                      <ion-card>
+                          <ion-card-header>
+                            <ion-card-title> 
+                              <div class="ion-text-center ion-text-capitalize">
+                                <a href='https://nuovosistematariffario.atm.it/#agevolazioni' target="_blank">  Guarda le agevolazioni in ambito urbano del Comune di Milano </a>
+                              </div>
+                            </ion-card-title>
+                          </ion-card-header>
+                      </ion-card>
+                  </ion-col>
+                </ion-row>
+
+          
+           
+                <ion-row *ngIf="idSelected!='1 (Urbano Milano)'">
+                  <ion-col size="12" size-sm>
+                    <ion-card >
+                      <ion-card-header>
+                        <ion-card-title>
+                          <div class="ion-text-center ion-text-capitalize">
+                            {{information.abbagevolato.mensile}} &euro;
+                          </div>
+                        </ion-card-title>
+                      </ion-card-header>
+                      <ion-card-content>
+                          <div class="ion-text-center ion-text-capitalize">
+                            Mensile under26 / over65
+                          </div>
+                      </ion-card-content>
+                      </ion-card>
+                  </ion-col>
+            
+                  <ion-col size="12" size-sm>
+                    <ion-card>
+                      <ion-card-header>
+                        <ion-card-title> 
+                          <div class="ion-text-center ion-text-capitalize">
+                            {{information.abbagevolato.annuale}} &euro;
+                          </div>
+                        </ion-card-title>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <div class="ion-text-center ion-text-capitalize">
+                            Annuale under26 / over65
+
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col >
+            
+                  <ion-col size="12" size-sm>
+                    <ion-card>
+                      <ion-card-header>
+                        <div class="ion-text-center ion-text-capitalize">           
+                          <ion-card-title> {{information.abbagevolato.annualeisee}} &euro;</ion-card-title>
+                        </div>
+                      </ion-card-header>
+                    <ion-card-content>
+                      <div class="ion-text-center ion-text-capitalize">   
+                          Annuale ISEE < 6.000 &euro;
+                      </div>  
+                    </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                  </ion-row>
+                   
+
+
+
 
   </ion-grid>
 

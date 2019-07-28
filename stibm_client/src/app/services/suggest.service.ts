@@ -8,8 +8,14 @@ import {AutoCompleteService} from 'ionic4-auto-complete';
 export class SuggestService implements AutoCompleteService {
   labelAttribute = 'name';
   public objects:any[] = [
-    {name:'Milano'},
-    {name:'San Donato M3'},
+    {
+      name:'Milano',
+      zona:8
+    },
+    {
+      name:'San Donato M3',
+      zona:90
+    },
     {name:'Cascina Gobba M2'},
     {name:'Sesto Marelli M1'},
     {name:'Rho Fiera Milano M1'},
