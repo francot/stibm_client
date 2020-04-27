@@ -13,14 +13,14 @@ export class DirectionDetailsPage implements OnInit {
   
   information = null;
   idSelected : any = null;
-
+  zone_title : string = "";
 
   
 
   private ticketInfo = {
-    "1 (Urbano Milano)" : { 
+    "1urb" : { 
       "ordinario" : { "ord" : "2,00" , "giorn" : "7,00" , "tregiorn" : "12,00" } , 
-      "abbordinario" : { "sett" : "-" , "mensile" : "50,00" , "annuale" : "460,00" }, 
+      "abbordinario" : { "sett" : "17,00" , "mensile" : "39,00" , "annuale" : "330,00" }, 
       "abbagevolato" : { "mensile" : "37,50" , "annuale" : "345,00" , "annualeisee" : "69,00" } 
 
     },
@@ -68,7 +68,12 @@ export class DirectionDetailsPage implements OnInit {
 
   ngOnInit() {
     // Get the ID that was passed with the URL
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    var id_zone = this.activatedRoute.snapshot.paramMap.get('id');
+
+    let arr = id_zone.split("_");
+    let id = arr[0];
+    this.zone_title = arr[1];
+
     this.idSelected = id;
     //alert("id: "+id);
     this.information = this.ticketInfo[id];

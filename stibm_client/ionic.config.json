@@ -1,5 +1,7 @@
 {
   "name": "stibm_client",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,18 +1,5 @@
 <ion-content>
-  <!-- <ion-toolbar>
-      <ion-title>Calcola la tariffa del tuo viaggio!</ion-title>
 
-  </ion-toolbar> -->
-
-  <!-- <ion-toolbar>
-      <ion-title>Cerca il costo di un viaggio tra due Comuni</ion-title>
-  </ion-toolbar> -->
-  <div padding text-center>
-    <h2>Calcola la tariffa del tuo viaggio!</h2>
-    <h4 style="font-size:11pt">Lorem ipsum dolor sit amet, 
-      consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. 
-      Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam </h4>
-  </div>
 
 
   <ion-grid> 
@@ -40,25 +27,29 @@
       </ion-row>
       <ion-row>
         <ion-col  size="12" size-sm>
-            <ion-item>
-                <ion-label style= "color: darkgray">Data Inizio Viaggio</ion-label>
-                <ion-datetime (ionChange)="dataChanged()" display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY" [(ngModel)]="dataString"  [min]="this.getCurrDate()" placeholder="Seleziona una data"></ion-datetime>
+            <ion-item >
+                <ion-label style= "color: darkgray">Data/Ora Inizio Viaggio</ion-label>
+                <ion-datetime (ionChange)="dataChanged()" display-format="DD/MM/YYYY HH:mm" [(ngModel)]="dataString"  [min]="this.getCurrDate()" placeholder="Seleziona una data"></ion-datetime>
               </ion-item>
               
         </ion-col>
+        <!--
         <ion-col  size="12" size-sm>
             <ion-item>
                 <ion-label style= "color: darkgray">Ora Inizio Viaggio</ion-label>
-                <ion-datetime [(ngModel)]="oraString"  display-format="HH:mm" picker-format="HH:mm" [min]="this.getCurrDate()"></ion-datetime>
+                <ion-datetime [(ngModel)]="oraString" display-format="HH:mm" [min]="this.getCurrDate()"></ion-datetime>
             </ion-item>
         </ion-col>
+      -->
       </ion-row>
       <ion-row>
           <ion-col  size="12">
               <ion-button expand="block" [disabled]='this.originString == null || this.destinationString == null' (click)="runSearch()">Calcola Tariffa</ion-button>
-          </ion-col>
+            </ion-col>
       </ion-row>
   </ion-grid> 
+
+  
 
 <!--  
    <ion-button  [routerLink]="['/directions/2']">test</ion-button> 
@@ -69,6 +60,58 @@
 <!--    START LIST  -->
 
 <ion-card *ngFor="let result of results" >
+    <ion-card-header>
+        
+        <ion-card-title *ngIf =" result.fare.price < 90"    >  
+<ion-item [routerLink]="['/','directions', result.fare.id +'_'+ result.fare.zone_id]">    
+  <ion-label text-wrap>        
+    <div class="ion-text-end"> 
+                <ion-text color="primary">
+
+         <strong> TARIFFA {{result.fare.id}} </strong> &nbsp;
+            zone {{result.fare.zone_id}}  &nbsp; 
+            {{result.fare.price}}&euro; vale {{result.fare.duration}}'&nbsp;          
+
+            </ion-text>
+          </div>
+          <div *ngFor="let color of result.fare.zone_color" [ngStyle]="getColorZone(color)"  align-self-end>
+              &nbsp;&nbsp;
+    </div>
+  </ion-label>
+          <ion-icon size="large" name="arrow-dropright"></ion-icon> 
+
+        </ion-item>
+
+        </ion-card-title>
+
+        <ion-card-title *ngIf =" result.fare.price === 90"    >  
+          <ion-item >    
+            <ion-label text-wrap>        
+              <div class="ion-text-start"> 
+                          <ion-text color="danger">
+                     <strong>TARIFFA</strong> non determinabile per indisponibilità di dati &nbsp;
+                      </ion-text>
+                    </div>
+            </ion-label>
+                  </ion-item>
+                  </ion-card-title>
+
+                  <ion-card-title *ngIf =" result.fare.price > 90"    >  
+                    <ion-item >    
+                      <ion-label text-wrap>        
+                        <div class="ion-text-start"> 
+                                    <ion-text color="danger">
+                                      <strong>TARIFFA</strong> non determinabile perchè il viaggio comprende servizi non integrati nello STIBM &nbsp;
+                                    </ion-text>
+                              </div>
+                      </ion-label>
+                            </ion-item>
+                            </ion-card-title>
+
+
+
+
+      </ion-card-header>
   <ion-card-content>
       <ion-grid>
         <ion-row text-wrap>
@@ -83,7 +126,7 @@
                     ">
                         <ion-img style="width:30px; float:left" *ngIf="step.line.vehicle.local_icon != null" src="{{step.line.vehicle.local_icon}}"></ion-img>
                         <ion-img style="width:30px; float:left" *ngIf="step.line.vehicle.local_icon == null && step.line.vehicle.icon != null" src="{{step.line.vehicle.icon}}"></ion-img>
-                        <ion-button small style="float:left; margin-top: 2px;"> {{step.line.short_name}}  </ion-button>
+                        <ion-button  fill="outline" small style="float:left; margin-top: 2px;" disabled = True> {{step.line.short_name}}  </ion-button>
                     </div>
                     
                     <ion-grid>
@@ -99,7 +142,7 @@
 
 
                         <ion-col size="12" size-sm="5">
-                            <ion-badge color="secondary" (click)="agencyurlClicked(step.line.agencies[0].url)" >{{step.line.agencies[0].name}}</ion-badge>
+                            <ion-badge   onMouseOver="this.style.color= '#F5F5F5'" onMouseOut="this.style.color='#FFFFFF'"  style="cursor: pointer;" color="secondary" (click)="agencyurlClicked(step.line.agencies[0].url)" >{{step.line.agencies[0].name}}</ion-badge>
                            <!--> href="{{step.line.agencies[0].url}}"<-->
                           </ion-col>
 
@@ -113,11 +156,14 @@
               <ion-col align-self-center size="12"  size-sm="3">            
                 {{result.departure_time.text}}   <ion-icon name="ios-arrow-forward">  </ion-icon> {{result.arrival_time.text}} 
                 <br> 
-                Durata: {{result.duration.text}}  
+                Durata: {{(result.duration.value/60 | number:'1.0-0')}}'  
               </ion-col>
         </ion-row>
       </ion-grid>
 
+                 <!--  <ion-button fill="outline" slot="end">View</ion-button>  -->
+
+                <!--  
 
       <ion-grid [routerLink]="['/','directions', result.fare.id]">
           <ion-row text-wrap>
@@ -125,12 +171,7 @@
       
                 
               <div class="ion-text-end"> 
-                <!--  
-                <ion-button fill="outline" slot="end">
-                      <strong>TARIFFA {{result.fare.id}}</strong> &nbsp;zone {{result.fare.zone_id}}  &nbsp; {{result.fare.price}}&euro; vale {{result.fare.duration}}' 
-                      &nbsp;  <ion-icon name="arrow-round-forward"></ion-icon> 
-                    </ion-button>
-                     --> 
+      
                   <ion-text color="primary">
                     
                         <h2>
@@ -145,10 +186,10 @@
                   &nbsp;&nbsp;
               </div>
             </ion-col>
-           <!--  <ion-button fill="outline" slot="end">View</ion-button>  -->
 
           </ion-row>
         </ion-grid>
+      --> 
 
   </ion-card-content>
 
@@ -156,7 +197,3 @@
 </ion-card>
 
 
-
-
-
-</ion-content>

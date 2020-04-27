@@ -6,7 +6,7 @@ import {SuggestService} from './../../services/suggest.service';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-directions',
@@ -17,16 +17,16 @@ import { HttpClient } from '@angular/common/http';
 
 export class DirectionsPage implements OnInit {
   
-
-  results: any = null;
+  results: any = [];
   originString: string = null;
   destinationString: string = null;
 
   zonaOrigin : string = null;
-  zonaDestination : string = null;
+  zonaIdOrigin : string = null;
 
   private loading: any;
-  private now = new Date().toISOString();
+  //private now = new Date().toISOString();
+  private now = new Date();
 
   dataString: string = "";
   oraString: string = "";
@@ -49,22 +49,38 @@ export class DirectionsPage implements OnInit {
   
 
   
-  constructor(private http: HttpClient, private router: Router, private loadingController: LoadingController, private suggestService: SuggestService) {
+  constructor(private http: HttpClient, 
+    private router: Router, 
+    private loadingController: LoadingController, 
+    private suggestService: SuggestService,
+    public alertController: AlertController) {
   }
 
   ngOnInit() { 
+
+    
     this.dataString = this.getCurrDate();
     this.oraString = this.getCurrDate();
   }
   
   dataChanged() {
     this.oraString = this.dataString;
+
+//    console.log(this.oraString);
+
   }
 
   getCurrDate() {
 
-    return this.now;
-    //return new Date().toISOString();
+    var dateFormat = require('dateformat');
+    let ret = "";
+
+    var data = dateFormat(this.now, "yyyy-mm-dd"); 
+    var ora = dateFormat(this.now, "HH:MM:ss.lo");
+    ora = ora.replace(/00$/,":00")
+    ret = data+"T"+ora;
+  
+    return ret;
 
   }
 
@@ -73,32 +89,42 @@ export class DirectionsPage implements OnInit {
 
   runSearch() {
 
-    console.log(this.zonaOrigin, this.zonaDestination);
 
     if (this.originString != null && this.destinationString != null) {
 
       if (this.originString == 'Milano' && this.destinationString == 'Milano') {
-        this.router.navigate(['/','directions','1 (Urbano Milano)']);
+        this.router.navigate(['/','directions','1urb_UrbanoMilano']);
       }
       else if (this.originString == this.destinationString){
-        this.router.navigate(['/','directions','8']);
+        this.router.navigate(['/','directions',this.zonaOrigin+'_'+this.zonaIdOrigin]);
       } 
       else {
 
-        let datetime = this.dataString+"|"+this.oraString;
+        //let datetime = this.dataString+"|"+this.oraString;
+        let datetime = this.dataString;
         let urlRequest = `${this.url}get_directions_data?origin=${encodeURI(this.originString)}&destination=${encodeURI(this.destinationString)}&departure_time=${encodeURI(datetime)}`;
-    
+        urlRequest = urlRequest.replace("+", "PLUS");
+
+        //console.log("URL: ", urlRequest);
+        //return;
         this.presentLoading();
         this.http.get(urlRequest)
         .subscribe(res => {
+          
           this.results = res;
+
           this.dismissLoading();
+          if (this.results == null || this.results.length == 0){
+            this.presentAlert();
+          }
+          
         },
         error => {
           setTimeout(() => {
             //alert("Errore");
-            this.results = null;
+            this.results = [];
             this.dismissLoading();
+            this.presentAlert();
           }, 1000);
         });
       }
@@ -146,11 +172,13 @@ export class DirectionsPage implements OnInit {
   originSelected(item) {
     this.originString = item[this.suggestService.labelAttribute];
     this.zonaOrigin = item['zona'];
+    this.zonaIdOrigin = item['zona_id'];
   }
 
   destinationSelected(item) {
     this.destinationString = item[this.suggestService.labelAttribute];
-    this.zonaDestination = item['zona'];
+    this.zonaOrigin = item['zona'];
+    this.zonaIdOrigin = item['zona_id'];
   }
   
 
@@ -167,5 +195,26 @@ export class DirectionsPage implements OnInit {
   agencyurlClicked(url: string) {
     window.open(url, '_system');
   }
+  
+  
+  
+  mouseoverAgency(){
+    console.log("mouse");
+    
+  }
+  
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+  
+      header: 'Impossibile calcolare la tariffa',
+          /*
+      subHeader: 'risultati',
+      */
+      message: 'Dati non disponibili per l\'origine/destinazione selezionata ',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 }
